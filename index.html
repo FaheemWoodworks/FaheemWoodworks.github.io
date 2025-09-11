@@ -8,6 +8,14 @@
     body {font-family: Inter, system-ui, sans-serif; background: #0b0f1a; color: #e5e7eb; margin:0; padding:2rem;}
     h2 {font-size: 2rem; margin: 2rem 0 1rem; text-align: center;}
 
+    /* Nav */
+    nav[aria-label="Primary"] { text-align:center; margin: 1rem 0 1.5rem; }
+    nav[aria-label="Primary"] a {
+      margin:0 1rem; color:#22c55e; text-decoration:none; font-weight:700;
+    }
+    nav[aria-label="Primary"] a:hover { text-decoration:underline; }
+
+    /* Slider */
     .slider {position: relative; border-radius: 20px; overflow: hidden; background: #111827; max-width: 900px; margin: 2rem auto; box-shadow: 0 8px 30px rgba(0,0,0,.5);}
     .slider-viewport {aspect-ratio: 4/3; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle at center, #1f2937, #0b0f1a);}
     .slider-viewport img {max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 12px; transition: opacity .4s ease;}
@@ -26,6 +34,12 @@
   </style>
 </head>
 <body>
+
+  <!-- Top Nav -->
+  <nav aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="projects.html">Completed Projects</a>
+  </nav>
 
   <h2>Myrtlewood Slab Showcase</h2>
   <div class="slider" id="slider-myrtle-1" data-folder="images/myrtle_1/" data-title="Myrtlewood slab">
@@ -76,39 +90,55 @@
     // Discover files automatically using predictable names.
     // Tries prefix_1.webp ... prefix_99.webp (also jpg/jpeg/png as fallbacks).
     async function discoverFiles(folder){
-      // Infer prefix from folder name (e.g., images/myrtle_1/ -> "myrtle")
+      // 1) Try manifest.txt if present (manual ordering)
+      try{
+        const res = await fetch(folder + 'manifest.txt', {cache:'no-store'});
+        if(res.ok){
+          const text = await res.text();
+          const listed = text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+          const verified = [];
+          for(const f of listed){ if(await probe(folder + f)) verified.push(f); }
+          if(verified.length) return verified;
+        }
+      }catch(_){}
+
+      // 2) Infer prefix from folder name (e.g., images/myrtle_1/ -> "myrtle")
       const parts = folder.replace(/\/$/,'').split('/');
       const folderName = parts[parts.length-1];
       const prefix = folderName.split('_')[0];
+
+      // Also support numeric-first like 2myrtle_1.webp if you used that scheme
+      const numPart = (folderName.match(/\d+/) || [''])[0];
+      const prefixes = [folderName + '_', prefix + '_', (numPart? numPart + prefix + '_' : ''), 'img_', 'photo_', ''].filter(Boolean);
+
       const exts = ['webp','jpg','jpeg','png'];
       const files = [];
-      for(let i=1;i<=99;i++){
+
+      // Try up to 120 in case you add tons of shots
+      for(let i=1;i<=120;i++){
         let found=false;
-        for(const ext of exts){
-          const candidate = `${prefix}_${i}.${ext}`;
-          /* eslint-disable no-await-in-loop */
-          // eslint not present; async loop OK in inline script
-          // Attempt to load; if present, keep and break ext loop
-          /* */
-          // Use HEAD not available on Pages; image probe instead
-          // This keeps it pure static
-          //
-          // Note: we avoid caching issues by adding a tiny query that browsers ignore for cache validation
-          const ok = await probe(folder + candidate);
-          if(ok){ files.push(candidate); found=true; break; }
-        }
-        if(!found){ break; }
-      }
-      // Fallback: also try 1.webp, 2.webp, ... if nothing matched prefix_#
-      if(files.length===0){
-        for(let i=1;i<=99;i++){
-          let found=false;
-          for(const ext of ['webp','jpg','jpeg','png']){
-            const candidate = `${i}.${ext}`;
+        for(const p of prefixes){
+          for(const ext of exts){
+            const candidate = `${p}${i}.${ext}`;
+            /* eslint-disable no-await-in-loop */
             const ok = await probe(folder + candidate);
             if(ok){ files.push(candidate); found=true; break; }
           }
-          if(!found){ break; }
+          if(found) break;
+        }
+        if(!found && files.length>0) break; // stop when the sequence ends
+      }
+
+      // Fallback: also try 1.webp, 2.webp, ... if nothing matched
+      if(files.length===0){
+        for(let i=1;i<=99;i++){
+          let hit=false;
+          for(const ext of exts){
+            const candidate = `${i}.${ext}`;
+            const ok = await probe(folder + candidate);
+            if(ok){ files.push(candidate); hit=true; break; }
+          }
+          if(!hit) break;
         }
       }
       return files;
