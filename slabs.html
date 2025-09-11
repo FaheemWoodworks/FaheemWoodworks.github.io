@@ -3,17 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Commission Ready Slabs — FJ Woodworks</title>
+  <title>Commission Ready Slabs — Faheem Woodworks</title>
   <style>
     body {font-family: Inter, system-ui, sans-serif; background:#0b0f1a; color:#e5e7eb; margin:0; padding:2rem;}
     h1,h2 {text-align:center}
     h1 {font-size:clamp(1.6rem,4vw,2.2rem); margin: .5rem 0 1.25rem}
     h2 {font-size: 2rem; margin: 2rem 0 1rem;}
 
-    /* Nav */
-    nav[aria-label="Primary"] { text-align:center; margin: 1rem 0 1.5rem; }
-    nav[aria-label="Primary"] a { margin:0 1rem; color:#22c55e; text-decoration:none; font-weight:700; }
-    nav[aria-label="Primary"] a:hover { text-decoration:underline; }
+    /* ===== Branded Navbar (matches other pages) ===== */
+    .navbar {
+      display:flex; justify-content:space-between; align-items:center;
+      background:#0b0f1a; padding:0.75rem 2rem; border-bottom:1px solid rgba(255,255,255,.06);
+      margin:-2rem -2rem 1rem; /* stretch full width because body has padding */
+    }
+    .navbar-left { display:flex; align-items:center; gap:.75rem; }
+    .navbar-left img { height:40px; width:auto; border-radius:6px; }
+    .navbar-left span { font-weight:700; font-size:1.2rem; color:#fff; }
+    .navbar-right a { margin-left:1.5rem; color:#22c55e; text-decoration:none; font-weight:600; }
+    .navbar-right a:hover { text-decoration:underline; }
+    /* active page highlight */
+    .navbar-right a[aria-current="page"]{ text-decoration:underline; }
 
     /* Slider */
     .slider {position: relative; border-radius: 20px; overflow: hidden; background: #111827; max-width: 900px; margin: 2rem auto; box-shadow: 0 8px 30px rgba(0,0,0,.5);}
@@ -31,12 +40,19 @@
   </style>
 </head>
 <body>
- <nav aria-label="Primary">
-  <a href="index.html">Home</a>
-  <a href="projects.html">Completed Projects</a>
-  <a href="slabs.html">Commission Ready</a>
-</nav>
 
+  <!-- Branded navbar -->
+  <nav class="navbar" aria-label="Primary">
+    <div class="navbar-left">
+      <img src="images/faheemwoodworks.jpg" alt="Faheem Woodworks logo" />
+      <span>Faheem Woodworks</span>
+    </div>
+    <div class="navbar-right">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Completed Projects</a>
+      <a href="slabs.html" aria-current="page">Commission Ready</a>
+    </div>
+  </nav>
 
   <h1>Commission Ready Slabs</h1>
 
@@ -156,3 +172,4 @@
   </script>
 </body>
 </html>
+

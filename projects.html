@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Completed Projects — FJ Woodworks</title>
-  <meta name="description" content="Completed custom builds from FJ Woodworks: live-edge slabs, tables, and more." />
+  <title>Completed Projects — Faheem Woodworks</title>
+  <meta name="description" content="Completed custom builds from Faheem Woodworks: live-edge slabs, tables, and more." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -16,12 +16,22 @@
     a{color:var(--brand);text-decoration:none}
     a:hover{opacity:.9}
     .container{max-width:1100px;margin:0 auto;padding:1.25rem}
-    header{position:sticky;top:0;z-index:50;background:rgba(11,15,26,.85);backdrop-filter:saturate(160%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px}
-    .brand{display:flex;gap:.6rem;align-items:center;font-weight:700}
-    .logo{width:28px;height:28px;border-radius:9px;background:conic-gradient(from 180deg,#16a34a,#22c55e,#84cc16)}
-    .nav a{color:#cbd5e1}
-    .nav a:hover{color:#fff}
+
+    /* ===== Branded sticky navbar ===== */
+    .site-header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(11,15,26,.9);
+      backdrop-filter:saturate(160%) blur(8px);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .navbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px}
+    .navbar-left{display:flex;align-items:center;gap:.75rem}
+    .navbar-left img{height:40px;width:auto;border-radius:6px}
+    .navbar-left span{font-weight:700;font-size:1.2rem;color:#fff}
+    .navbar-right a{margin-left:1.5rem;color:#22c55e;text-decoration:none;font-weight:600}
+    .navbar-right a:hover{text-decoration:underline}
+    /* active link */
+    .navbar-right a[aria-current="page"]{text-decoration:underline}
 
     h1{font-size:clamp(1.6rem,4vw,2.4rem);margin:1.2rem 0 .2rem}
     p.muted{color:var(--muted)}
@@ -57,20 +67,25 @@
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand"><div aria-hidden class="logo"></div><span>FJ Woodworks</span></div>
-      <nav aria-label="Primary">
-  <a href="index.html">Home</a>
-  <a href="projects.html">Completed Projects</a>
-  <a href="slabs.html">Commission Ready</a>
-</nav>
+
+  <!-- ===== Branded Navbar ===== -->
+  <header class="site-header">
+    <div class="container navbar">
+      <div class="navbar-left">
+        <img src="images/faheemwoodworks.jpg" alt="Faheem Woodworks logo" />
+        <span>Faheem Woodworks</span>
+      </div>
+      <nav class="navbar-right" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="projects.html" aria-current="page">Completed Projects</a>
+        <a href="slabs.html">Commission Ready</a>
+      </nav>
     </div>
   </header>
 
   <main class="container">
     <h1>Completed Projects</h1>
-    <p class="muted">A closer look at finished builds. High‑resolution images with captions, swipe, keyboard arrows, and fullscreen.</p>
+    <p class="muted">A closer look at finished builds. High-resolution images with captions, swipe, keyboard arrows, and fullscreen.</p>
 
     <!-- Project: Redwood -->
     <section class="project card" id="redwood-project">
@@ -98,7 +113,7 @@
   </main>
 
   <footer>
-    <div class="container">© <span id="y"></span> FJ Woodworks</div>
+    <div class="container">© <span id="y"></span> Faheem Woodworks</div>
   </footer>
 
   <script>
@@ -112,15 +127,15 @@
     (async function(){
       const folder = 'images/redwood_project/';
       const base = 'redwood_';
-      const count = 10; // you said 1..10
+      const count = 10; // 1..10
       const exts = ['webp','jpg','jpeg','png'];
       const files = [];
 
       for(let i=1;i<=count;i++){
         let found=null;
         for(const ext of exts){
-          /* eslint-disable no-await-in-loop */
           const candidate = `${folder}${base}${i}.${ext}`;
+          /* eslint-disable no-await-in-loop */
           if(await probe(candidate)){ found = `${base}${i}.${ext}`; break; }
         }
         if(found) files.push(found);
@@ -135,7 +150,6 @@
       const shell = document.getElementById('gal-redwood');
       let idx=0;
 
-      // Build thumbs
       files.forEach((f,i)=>{
         const b=document.createElement('button'); b.className='thumb'; b.type='button';
         const t=document.createElement('img'); t.loading='lazy'; t.src=folder+f; t.alt='Thumb '+(i+1);

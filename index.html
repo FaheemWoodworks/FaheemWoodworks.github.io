@@ -3,15 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FJ Woodworks — Live Edge Slabs & Projects</title>
+  <title>Faheem Woodworks — Live Edge Slabs & Projects</title>
   <style>
     body {font-family: Inter, system-ui, sans-serif; background:#0b0f1a; color:#e5e7eb; margin:0; padding:2rem;}
     h2 {font-size: 2rem; margin: 2rem 0 1rem; text-align: center;}
 
-    /* Nav */
-    nav[aria-label="Primary"] { text-align:center; margin: 1rem 0 1.5rem; }
-    nav[aria-label="Primary"] a { margin:0 1rem; color:#22c55e; text-decoration:none; font-weight:700; }
-    nav[aria-label="Primary"] a:hover { text-decoration:underline; }
+    /* ===== Branded Navbar ===== */
+    .navbar {
+      display:flex; justify-content:space-between; align-items:center;
+      background:#0b0f1a; padding:0.75rem 2rem; border-bottom:1px solid rgba(255,255,255,.06);
+      margin:-2rem -2rem 1rem; /* stretch full-bleed across the page since body has padding */
+    }
+    .navbar-left { display:flex; align-items:center; gap:.75rem; }
+    .navbar-left img { height:40px; width:auto; border-radius:6px; }
+    .navbar-left span { font-weight:700; font-size:1.2rem; color:#fff; }
+    .navbar-right a {
+      margin-left:1.5rem; color:#22c55e; text-decoration:none; font-weight:600;
+    }
+    .navbar-right a:hover { text-decoration:underline; }
 
     /* Slider */
     .slider {position: relative; border-radius: 20px; overflow: hidden; background: #111827; max-width: 900px; margin: 2rem auto; box-shadow: 0 8px 30px rgba(0,0,0,.5);}
@@ -30,13 +39,18 @@
 </head>
 <body>
 
-  <!-- Top Nav -->
- <nav aria-label="Primary">
-  <a href="index.html">Home</a>
-  <a href="projects.html">Completed Projects</a>
-  <a href="slabs.html">Commission Ready</a>
-</nav>
-
+  <!-- ===== Top Nav (brand + links) ===== -->
+  <nav class="navbar" aria-label="Primary">
+    <div class="navbar-left">
+      <img src="images/faheemwoodworks.jpg" alt="Faheem Woodworks logo" />
+      <span>Faheem Woodworks</span>
+    </div>
+    <div class="navbar-right">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Completed Projects</a>
+      <a href="slabs.html">Commission Ready</a>
+    </div>
+  </nav>
 
   <!-- ===== HERO CAROUSEL ===== -->
   <style>
@@ -102,7 +116,7 @@
     </div>
   </div>
 
-<!--
+  <!--
   <h2>Myrtlewood Slab Showcase</h2>
   <div class="slider" id="slider-myrtle-1" data-folder="images/myrtle_1/" data-title="Myrtlewood slab">
     <button class="slider-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
@@ -113,7 +127,8 @@
     <div class="slider-dots" aria-hidden="true"></div>
   </div>
   <div class="caption"></div>
--->
+  -->
+
   <h2>Maple Slab Showcase</h2>
   <div class="slider" id="slider-maple-1" data-folder="images/maple_1/" data-title="Maple slab">
     <button class="slider-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
@@ -222,9 +237,9 @@
 
       // Build name patterns from folder
       const parts = folder.replace(/\/$/,'').split('/');
-      const folderName = parts[parts.length-1];      // e.g. "walnut_1"
-      const basePrefix = folderName.split('_')[0];   // "walnut"
-      const numPart = (folderName.match(/\d+/) || [''])[0]; // "1" or ""
+      const folderName = parts[parts.length-1];
+      const basePrefix = folderName.split('_')[0];
+      const numPart = (folderName.match(/\d+/) || [''])[0];
 
       const exts = ['webp','jpg','jpeg','png'];
       const files = [];
@@ -232,10 +247,10 @@
       for(let i=1;i<=120;i++){
         let found=false;
         const nameCandidates = [
-          `${basePrefix}_${i}`,                         // walnut_1.webp
-          `${folderName}_${i}`,                         // walnut_1_1.webp
-          ...(numPart ? [`${numPart}${basePrefix}_${i}`] : []), // 1walnut_1.webp
-          `${i}`                                        // 1.webp fallback
+          `${basePrefix}_${i}`,
+          `${folderName}_${i}`,
+          ...(numPart ? [`${numPart}${basePrefix}_${i}`] : []),
+          `${i}`
         ];
         for(const stem of nameCandidates){
           for(const ext of exts){
