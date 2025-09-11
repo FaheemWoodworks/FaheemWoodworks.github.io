@@ -1,144 +1,166 @@
-<!-- ===== Modern Myrtle Gallery ===== -->
-<style>
-  /* --- Modern Gallery Styles --- */
-  .gallery{position:relative;background:linear-gradient(180deg,#0f172a,#0b0f1a);border-radius:18px;padding:1rem;border:1px solid rgba(255,255,255,.06);box-shadow:0 10px 30px rgba(0,0,0,.35)}
-  .gallery .frame{position:relative;border-radius:14px;overflow:hidden;background:radial-gradient(1000px 400px at 80% -20%,rgba(34,197,94,.08),transparent 60%), #0b1220;min-height:380px;display:grid;place-items:center}
-  .gallery img.main{max-width:100%;max-height:72vh;width:100%;height:64vh;object-fit:contain;transition:opacity .25s ease, transform .25s ease;opacity:1}
-  .gallery img.main.fade{opacity:0}
-  .gallery .chrome{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent);pointer-events:none}
-  .gallery .count{font-weight:700;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.1);padding:.25rem .5rem;border-radius:999px}
-  .gallery .caption{position:absolute;left:0;right:0;bottom:0;padding:.75rem 1rem;background:linear-gradient(0deg,rgba(0,0,0,.55),rgba(0,0,0,0));font-size:.95rem}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Slab Galleries — FJ Woodworks</title>
+  <style>
+    body {font-family: Inter, system-ui, sans-serif; background: #0b0f1a; color: #e5e7eb; margin:0; padding:2rem;}
+    h2 {font-size: 2rem; margin: 2rem 0 1rem; text-align: center;}
 
-  .nav-btn{position:absolute;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:46px;height:46px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.45);cursor:pointer;color:#fff}
-  .nav-btn:hover{background:rgba(0,0,0,.6)}
-  .nav-btn:active{transform:translateY(-50%) scale(.98)}
-  .nav-btn.left{left:.6rem}
-  .nav-btn.right{right:.6rem}
+    .slider {position: relative; border-radius: 20px; overflow: hidden; background: #111827; max-width: 900px; margin: 2rem auto; box-shadow: 0 8px 30px rgba(0,0,0,.5);}
+    .slider-viewport {aspect-ratio: 4/3; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle at center, #1f2937, #0b0f1a);}
+    .slider-viewport img {max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 12px; transition: opacity .4s ease;}
 
-  .thumbs{display:flex;gap:.5rem;overflow-x:auto;padding:.75rem .25rem;margin-top:.75rem}
-  .thumbs::-webkit-scrollbar{height:8px}
-  .thumbs::-webkit-scrollbar-thumb{background:#1f2937;border-radius:999px}
-  .thumb{flex:0 0 auto;width:80px;height:64px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:#0b1220;opacity:.85;cursor:pointer}
-  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-  .thumb.active{outline:2px solid rgba(34,197,94,.7);opacity:1}
+    .slider-btn {position: absolute; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: none; background: rgba(0,0,0,.5); cursor: pointer; color: #fff; font-size: 22px; backdrop-filter: blur(6px); transition: background .3s ease, transform .2s ease;}
+    .slider-btn:hover {background: rgba(0,0,0,.75); transform: scale(1.05);}
+    .slider-btn.left {left: 12px;}
+    .slider-btn.right {right: 12px;}
 
-  .toolbar{display:flex;gap:.5rem}
-  .toolbtn{pointer-events:auto;display:inline-grid;place-items:center;width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);cursor:pointer}
-  .toolbtn:hover{background:rgba(0,0,0,.6)}
+    .slider-dots {position: absolute; bottom: 12px; left: 0; right: 0; display: flex; gap: .5rem; justify-content: center;}
+    .slider-dots button {width: 10px; height: 10px; border-radius: 50%; border: none; background: rgba(255,255,255,.4); cursor: pointer; transition: background .3s ease, transform .3s ease;}
+    .slider-dots button:hover {transform: scale(1.2);}
+    .slider-dots button[aria-current="true"] {background: #22c55e;}
 
-  @media (max-width:700px){
-    .gallery img.main{height:50vh}
-  }
-</style>
+    .caption {text-align: center; padding-top: .75rem; font-size: .95rem; color: #9ca3af;}
+  </style>
+</head>
+<body>
 
-<section id="work">
-  <div class="container">
-    <h2>Recent Work — Myrtle Burl Bookmatch</h2>
-
-    <div class="gallery" id="gal-myrtle" aria-label="Myrtle slab photo gallery">
-      <div class="frame">
-        <img class="main" id="gal-myrtle-img"
-             src="images/myrtle_1/myrtle_1.webp"
-             alt="Myrtlewood slab photo 1" loading="eager"/>
-
-        <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
-        <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
-
-        <div class="chrome">
-          <span class="count" id="gal-myrtle-count">1 / 5</span>
-          <div class="toolbar">
-            <button class="toolbtn" id="gal-myrtle-full" aria-label="Enter full screen">⛶</button>
-            <a class="toolbtn" id="gal-myrtle-open"
-               aria-label="Open original in new tab"
-               href="images/myrtle_1/myrtle_1.webp" target="_blank" rel="noopener">↗</a>
-          </div>
-        </div>
-
-        <div class="caption" id="gal-myrtle-cap">
-          Myrtlewood live-edge bookmatch — raw slab
-        </div>
-      </div>
-
-      <div class="thumbs" id="gal-myrtle-thumbs" aria-label="Thumbnails"></div>
+  <h2>Myrtlewood Slab Showcase</h2>
+  <div class="slider" id="slider-myrtle-1" data-folder="images/myrtle_1/" data-title="Myrtlewood slab">
+    <button class="slider-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
+    <div class="slider-viewport">
+      <img class="slide-img" alt="Loading…" />
     </div>
+    <button class="slider-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
+    <div class="slider-dots" aria-hidden="true"></div>
   </div>
-</section>
+  <div class="caption"></div>
 
-<script>
-(function(){
-  const folder = 'images/myrtle_1/';
-  const files = [
-    {name:'myrtle_1.webp', cap:'Myrtlewood live-edge bookmatch — raw slab'},
-    {name:'myrtle_2.webp', cap:'Detail: burl figure and sapwood contrast'},
-    {name:'myrtle_3.webp', cap:'Edge profile candidate & grain'},
-    {name:'myrtle_4.webp', cap:'Bookmatch alignment before flattening'},
-    {name:'myrtle_5.webp', cap:'Alcohol wipe preview of color'}
-  ];
+  <h2>Maple Slab Showcase</h2>
+  <div class="slider" id="slider-maple-1" data-folder="images/maple_1/" data-title="Maple slab">
+    <button class="slider-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
+    <div class="slider-viewport">
+      <img class="slide-img" alt="Loading…" />
+    </div>
+    <button class="slider-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
+    <div class="slider-dots" aria-hidden="true"></div>
+  </div>
+  <div class="caption"></div>
 
-  const img    = document.getElementById('gal-myrtle-img');
-  const cap    = document.getElementById('gal-myrtle-cap');
-  const count  = document.getElementById('gal-myrtle-count');
-  const thumbs = document.getElementById('gal-myrtle-thumbs');
-  const shell  = document.getElementById('gal-myrtle');
-  const openA  = document.getElementById('gal-myrtle-open');
-  const fullB  = document.getElementById('gal-myrtle-full');
-  let idx = 0;
+  <h2>Myrtlewood Slab Showcase 2</h2>
+  <div class="slider" id="slider-myrtle-2" data-folder="images/myrtle_2/" data-title="Myrtlewood slab">
+    <button class="slider-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
+    <div class="slider-viewport">
+      <img class="slide-img" alt="Loading…" />
+    </div>
+    <button class="slider-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
+    <div class="slider-dots" aria-hidden="true"></div>
+  </div>
+  <div class="caption"></div>
 
-  // Build thumbnails
-  files.forEach((f,i)=>{
-    const t = document.createElement('button');
-    t.className='thumb'; t.type='button'; t.setAttribute('aria-label','Go to photo '+(i+1));
-    const ti = document.createElement('img'); ti.loading='lazy'; ti.src = folder+f.name; ti.alt = 'Thumb '+(i+1);
-    t.appendChild(ti); t.addEventListener('click',()=>{idx=i; update(true)}); thumbs.appendChild(t);
-  });
+  <script>
+    // --- Utility: probe if an image exists ---
+    function probe(url, timeout=6000){
+      return new Promise(resolve=>{
+        const img = new Image();
+        let done=false;
+        const timer=setTimeout(()=>{ if(!done){ done=true; img.src=''; resolve(false);}}, timeout);
+        img.onload=()=>{ if(!done){ done=true; clearTimeout(timer); resolve(true);} };
+        img.onerror=()=>{ if(!done){ done=true; clearTimeout(timer); resolve(false);} };
+        img.src=url;
+      });
+    }
 
-  function preload(nextIndex){ const n = new Image(); n.src = folder + files[nextIndex].name; }
+    // Discover files automatically using predictable names.
+    // Tries prefix_1.webp ... prefix_99.webp (also jpg/jpeg/png as fallbacks).
+    async function discoverFiles(folder){
+      // Infer prefix from folder name (e.g., images/myrtle_1/ -> "myrtle")
+      const parts = folder.replace(/\/$/,'').split('/');
+      const folderName = parts[parts.length-1];
+      const prefix = folderName.split('_')[0];
+      const exts = ['webp','jpg','jpeg','png'];
+      const files = [];
+      for(let i=1;i<=99;i++){
+        let found=false;
+        for(const ext of exts){
+          const candidate = `${prefix}_${i}.${ext}`;
+          /* eslint-disable no-await-in-loop */
+          // eslint not present; async loop OK in inline script
+          // Attempt to load; if present, keep and break ext loop
+          /* */
+          // Use HEAD not available on Pages; image probe instead
+          // This keeps it pure static
+          //
+          // Note: we avoid caching issues by adding a tiny query that browsers ignore for cache validation
+          const ok = await probe(folder + candidate);
+          if(ok){ files.push(candidate); found=true; break; }
+        }
+        if(!found){ break; }
+      }
+      // Fallback: also try 1.webp, 2.webp, ... if nothing matched prefix_#
+      if(files.length===0){
+        for(let i=1;i<=99;i++){
+          let found=false;
+          for(const ext of ['webp','jpg','jpeg','png']){
+            const candidate = `${i}.${ext}`;
+            const ok = await probe(folder + candidate);
+            if(ok){ files.push(candidate); found=true; break; }
+          }
+          if(!found){ break; }
+        }
+      }
+      return files;
+    }
 
-  function update(animate){
-    const f = files[idx];
-    count.textContent = (idx+1)+' / '+files.length;
-    cap.textContent   = f.cap;
-    openA.href        = folder + f.name;
+    function wireSlider(sliderEl, files){
+      const folder = sliderEl.dataset.folder;
+      const title  = sliderEl.dataset.title || 'Gallery image';
+      const imgEl  = sliderEl.querySelector('img.slide-img');
+      const dotsEl = sliderEl.querySelector('.slider-dots');
+      const captionEl = sliderEl.nextElementSibling && sliderEl.nextElementSibling.classList.contains('caption') ? sliderEl.nextElementSibling : null;
+      let idx = 0;
 
-    if(animate){ img.classList.add('fade'); }
-    const nextSrc = folder + f.name;
-    setTimeout(()=>{ img.src = nextSrc; img.alt = f.cap; img.classList.remove('fade'); }, 120);
+      function renderDots(){
+        dotsEl.innerHTML='';
+        files.forEach((_,i)=>{
+          const b=document.createElement('button');
+          b.type='button';
+          b.setAttribute('aria-label',`Go to photo ${i+1}`);
+          if(i===idx) b.setAttribute('aria-current','true');
+          b.addEventListener('click',()=>{idx=i;update(true)});
+          dotsEl.appendChild(b);
+        });
+      }
+      function update(animate){
+        const src = folder + files[idx];
+        if(animate){ imgEl.style.opacity=0; }
+        setTimeout(()=>{ imgEl.src = src; imgEl.alt = `${title} photo ${idx+1}`; if(captionEl) captionEl.textContent = `${title} photo ${idx+1}`; imgEl.style.opacity=1; }, animate?180:0);
+        [...dotsEl.children].forEach((d,i)=> d.toggleAttribute('aria-current', i===idx));
+      }
+      function next(delta){ idx = (idx + delta + files.length) % files.length; update(true); }
 
-    preload((idx+1)%files.length);
-    [...thumbs.children].forEach((el,i)=> el.classList.toggle('active', i===idx));
-  }
+      sliderEl.querySelectorAll('.slider-btn').forEach(btn=>{
+        btn.addEventListener('click',()=> next(parseInt(btn.dataset.dir,10)) );
+      });
+      sliderEl.tabIndex=0;
+      sliderEl.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') next(1); if(e.key==='ArrowLeft') next(-1); });
+      let sx=null; sliderEl.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;});
+      sliderEl.addEventListener('touchend',e=>{ if(sx==null) return; const dx=e.changedTouches[0].clientX - sx; if(Math.abs(dx)>40){ next(dx<0?1:-1);} sx=null;});
 
-  function next(delta){ idx = (idx + delta + files.length) % files.length; update(true); }
+      renderDots(); update(false);
+    }
 
-  shell.querySelectorAll('.nav-btn').forEach(btn=>{
-    btn.addEventListener('click',()=> next(parseInt(btn.dataset.dir,10)) );
-  });
-
-  // Keyboard & touch & fullscreen
-  shell.tabIndex=0;
-  shell.addEventListener('keydown',e=>{
-    if(e.key==='ArrowRight') next(1);
-    if(e.key==='ArrowLeft') next(-1);
-    if(e.key.toLowerCase()==='f') toggleFull();
-  });
-
-  let sx=null;
-  shell.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;});
-  shell.addEventListener('touchend',e=>{
-    if(sx==null) return;
-    const dx=e.changedTouches[0].clientX - sx;
-    if(Math.abs(dx)>40){ next(dx<0?1:-1);}
-    sx=null;
-  });
-
-  function toggleFull(){
-    const el = shell.querySelector('.frame');
-    if(!document.fullscreenElement){ el.requestFullscreen?.(); }
-    else { document.exitFullscreen?.(); }
-  }
-  fullB.addEventListener('click', toggleFull);
-
-  // Initial paint
-  update(false);
-})();
-</script>
+    (async function(){
+      const sliders = document.querySelectorAll('.slider[data-folder]');
+      for(const el of sliders){
+        const folder = el.dataset.folder;
+        const files = await discoverFiles(folder);
+        if(files.length){ wireSlider(el, files); }
+        else { el.querySelector('img').alt = 'No images found'; }
+      }
+    })();
+  </script>
+</body>
+</html>
