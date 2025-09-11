@@ -98,8 +98,7 @@
       });
     }
 
-    // Discover files automatically using predictable names.
-    // Tries prefix_1.webp ... prefix_99.webp (also jpg/jpeg/png as fallbacks).
+    // --- Discover files ---
     async function discoverFiles(folder){
       // 1) Try manifest.txt if present (manual ordering)
       try{
@@ -113,48 +112,40 @@
         }
       }catch(_){}
 
-      // 2) Infer prefix from folder name (e.g., images/myrtle_1/ -> "myrtle")
+      // 2) Build candidate patterns
       const parts = folder.replace(/\/$/,'').split('/');
-      const folderName = parts[parts.length-1];
-      const prefix = folderName.split('_')[0];
-
-      // Also support numeric-first like 2myrtle_1.webp if you used that scheme
-      const numPart = (folderName.match(/\d+/) || [''])[0];
-      const prefixes = [folderName + '_', prefix + '_', (numPart? numPart + prefix + '_' : ''), 'img_', 'photo_', ''].filter(Boolean);
+      const folderName = parts[parts.length-1];      // e.g. "walnut_1"
+      const basePrefix = folderName.split('_')[0];   // "walnut"
+      const numPart = (folderName.match(/\d+/) || [''])[0]; // "1" or ""
 
       const exts = ['webp','jpg','jpeg','png'];
       const files = [];
 
-      // Try up to 120 in case you add tons of shots
       for(let i=1;i<=120;i++){
         let found=false;
-        for(const p of prefixes){
+
+        const nameCandidates = [
+          `${basePrefix}_${i}`,                        // walnut_1.webp ✅
+          `${folderName}_${i}`,                        // walnut_1_1.webp
+          ...(numPart ? [`${numPart}${basePrefix}_${i}`] : []), // 1walnut_1.webp
+          `${i}`                                       // 1.webp fallback
+        ];
+
+        for(const stem of nameCandidates){
           for(const ext of exts){
-            const candidate = `${p}${i}.${ext}`;
+            const candidate = `${stem}.${ext}`;
             /* eslint-disable no-await-in-loop */
-            const ok = await probe(folder + candidate);
-            if(ok){ files.push(candidate); found=true; break; }
+            if(await probe(folder + candidate)){ files.push(candidate); found=true; break; }
           }
           if(found) break;
         }
-        if(!found && files.length>0) break; // stop when the sequence ends
+        if(!found && files.length>0) break;
       }
 
-      // Fallback: also try 1.webp, 2.webp, ... if nothing matched
-      if(files.length===0){
-        for(let i=1;i<=99;i++){
-          let hit=false;
-          for(const ext of exts){
-            const candidate = `${i}.${ext}`;
-            const ok = await probe(folder + candidate);
-            if(ok){ files.push(candidate); hit=true; break; }
-          }
-          if(!hit) break;
-        }
-      }
       return files;
     }
 
+    // --- Wire slider ---
     function wireSlider(sliderEl, files){
       const folder = sliderEl.dataset.folder;
       const title  = sliderEl.dataset.title || 'Gallery image';
@@ -193,6 +184,7 @@
       renderDots(); update(false);
     }
 
+    // --- Init all sliders ---
     (async function(){
       const sliders = document.querySelectorAll('.slider[data-folder]');
       for(const el of sliders){
@@ -205,3 +197,4 @@
   </script>
 </body>
 </html>
+
