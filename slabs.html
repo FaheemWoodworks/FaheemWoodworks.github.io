@@ -4,188 +4,333 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Commission Ready Slabs — Faheem Woodworks</title>
+  <meta name="description" content="Live-edge slabs in stock and ready for commission from Faheem Woodworks." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {font-family: Inter, system-ui, sans-serif; background:#0b0f1a; color:#e5e7eb; margin:0; padding:2rem;}
-    h1,h2 {text-align:center}
-    h1 {font-size:clamp(1.6rem,4vw,2.2rem); margin: .5rem 0 1.25rem}
-    h2 {font-size: 2rem; margin: 2rem 0 1rem;}
+    :root{--bg:#0b0f1a;--panel:#111827;--muted:#94a3b8;--text:#e5e7eb;--brand:#22c55e}
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    a{color:var(--brand);text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:1.25rem}
 
-    /* ===== Branded Navbar (matches other pages) ===== */
-    .navbar {
-      display:flex; justify-content:space-between; align-items:center;
-      background:#0b0f1a; padding:0.75rem 2rem; border-bottom:1px solid rgba(255,255,255,.06);
-      margin:-2rem -2rem 1rem; /* stretch full width because body has padding */
+    /* ===== Branded sticky navbar (matches projects) ===== */
+    .site-header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(11,15,26,.9);
+      backdrop-filter:saturate(160%) blur(8px);
+      border-bottom:1px solid rgba(255,255,255,.06);
     }
-    .navbar-left { display:flex; align-items:center; gap:.75rem; }
-    .navbar-left img { height:40px; width:auto; border-radius:6px; }
-    .navbar-left span { font-weight:700; font-size:1.2rem; color:#fff; }
-    .navbar-right a { margin-left:1.5rem; color:#22c55e; text-decoration:none; font-weight:600; }
-    .navbar-right a:hover { text-decoration:underline; }
-    /* active page highlight */
-    .navbar-right a[aria-current="page"]{ text-decoration:underline; }
+    .navbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px}
+    .navbar-left{display:flex;align-items:center;gap:.75rem}
+    .navbar-left img{height:40px;width:auto;border-radius:6px}
+    .navbar-left span{font-weight:700;font-size:1.2rem;color:#fff}
+    .navbar-right a{margin-left:1.5rem;color:#22c55e;text-decoration:none;font-weight:600}
+    .navbar-right a:hover{text-decoration:underline}
+    .navbar-right a[aria-current="page"]{text-decoration:underline}
 
-    /* Slider */
-    .slider {position: relative; border-radius: 20px; overflow: hidden; background: #111827; max-width: 900px; margin: 2rem auto; box-shadow: 0 8px 30px rgba(0,0,0,.5);}
-    .slider-viewport {aspect-ratio: 4/3; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle at center, #1f2937, #0b0f1a);}
-    .slider-viewport img {max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 12px; transition: opacity .4s ease;}
-    .slider-btn {position: absolute; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: none; background: rgba(0,0,0,.5); cursor: pointer; color: #fff; font-size: 22px; backdrop-filter: blur(6px); transition: background .3s ease, transform .2s ease;}
-    .slider-btn:hover {background: rgba(0,0,0,.75); transform: scale(1.05);}
-    .slider-btn.left {left: 12px;}
-    .slider-btn.right {right: 12px;}
-    .slider-dots {position: absolute; bottom: 12px; left: 0; right: 0; display: flex; gap: .5rem; justify-content: center;}
-    .slider-dots button {width: 10px; height: 10px; border-radius: 50%; border: none; background: rgba(255,255,255,.4); cursor: pointer; transition: background .3s ease, transform .3s ease;}
-    .slider-dots button:hover {transform: scale(1.2);}
-    .slider-dots button[aria-current="true"] {background: #22c55e;}
-    .caption {text-align: center; padding-top: .75rem; font-size: .95rem; color: #9ca3af;}
+    h1{font-size:clamp(1.6rem,4vw,2.4rem);margin:1.2rem 0 .2rem;text-align:left}
+    p.muted{color:#94a3b8}
+
+    /* --- Card gallery (same as projects) --- */
+    .section{margin:1.5rem 0 2.5rem}
+    .card{background:linear-gradient(180deg,#0f172a,#0b0f1a);border-radius:18px;border:1px solid rgba(255,255,255,.06);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .card-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.06)}
+    .title{margin:0;font-size:1.25rem}
+    .badge{border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:.25rem .5rem;color:#a7f3d0;background:rgba(16,185,129,.12);font-size:.8rem}
+
+    .gallery{position:relative;padding:1rem}
+    .frame{position:relative;border-radius:14px;overflow:hidden;background:radial-gradient(1000px 400px at 80% -20%,rgba(34,197,94,.08),transparent 60%), #0b1220;min-height:360px;display:grid;place-items:center}
+    .main{max-width:100%;max-height:72vh;width:100%;height:64vh;object-fit:contain;transition:opacity .25s ease, transform .25s ease}
+    .main.fade{opacity:0}
+    .chrome{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent);pointer-events:none}
+    .count{font-weight:700;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.1);padding:.25rem .5rem;border-radius:999px}
+
+    .nav-btn{position:absolute;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:46px;height:46px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.45);cursor:pointer;color:#fff}
+    .nav-btn:hover{background:rgba(0,0,0,.6)}
+    .nav-btn:active{transform:translateY(-50%) scale(.98)}
+    .nav-btn.left{left:.6rem}
+    .nav-btn.right{right:.6rem}
+
+    .thumbs{display:flex;gap:.5rem;overflow-x:auto;padding:.75rem .25rem;margin-top:.75rem}
+    .thumbs::-webkit-scrollbar{height:8px}
+    .thumbs::-webkit-scrollbar-thumb{background:#1f2937;border-radius:999px}
+    .thumb{flex:0 0 auto;width:80px;height:64px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:#0b1220;opacity:.85;cursor:pointer}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .thumb.active{outline:2px solid rgba(34,197,94,.7);opacity:1}
+
+    footer{padding:2rem 0;color:#94a3b8;border-top:1px solid rgba(255,255,255,.06);margin-top:2rem}
   </style>
 </head>
 <body>
 
-  <!-- Branded navbar -->
-  <nav class="navbar" aria-label="Primary">
-    <div class="navbar-left">
-      <img src="images/faheemwoodworks.jpg" alt="Faheem Woodworks logo" />
-      <span>Faheem Woodworks</span>
+  <!-- ===== Navbar ===== -->
+  <header class="site-header">
+    <div class="container navbar">
+      <div class="navbar-left">
+        <img src="images/faheemwoodworks.jpg" alt="Faheem Woodworks logo" />
+        <span>Faheem Woodworks</span>
+      </div>
+      <nav class="navbar-right" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Completed Projects</a>
+        <a href="slabs.html" aria-current="page">Commission Ready</a>
+      </nav>
     </div>
-    <div class="navbar-right">
-      <a href="index.html">Home</a>
-      <a href="projects.html">Completed Projects</a>
-      <a href="slabs.html" aria-current="page">Commission Ready</a>
-    </div>
-  </nav>
+  </header>
 
-  <h1>Commission Ready Slabs</h1>
+  <main class="container">
+    <h1>Commission Ready Slabs</h1>
+    <p class="muted">Live-edge slabs in stock. Browse details, swipe/arrow through images, open originals, or enter fullscreen.</p>
 
-  <h2>Myrtlewood Slab Showcase</h2>
-  <div class="slider" data-folder="images/myrtle_1/" data-title="Myrtlewood slab">
-    <button class="slider-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
-    <div class="slider-viewport"><img class="slide-img" alt="Loading…"/></div>
-    <button class="slider-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
-    <div class="slider-dots" aria-hidden="true"></div>
-  </div><div class="caption"></div>
+    <!-- Myrtlewood Slab -->
+    <section class="section card">
+      <div class="card-header">
+        <h2 class="title">Myrtlewood Slab</h2>
+        <span class="badge">Available</span>
+      </div>
+      <div class="gallery"
+           data-title="Myrtlewood Slab"
+           data-folder="images/myrtle_1/"
+           data-prefix="myrtle_">
+        <div class="frame">
+          <img class="main" alt="Myrtlewood Slab"/>
+          <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
+          <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
+          <div class="chrome">
+            <span class="count">1 / 1</span>
+            <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
+              <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
+              <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="thumbs" aria-label="Thumbnails"></div>
+      </div>
+    </section>
 
-  <h2>Maple Slab Showcase</h2>
-  <div class="slider" data-folder="images/maple_1/" data-title="Maple slab">
-    <button class="slider-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
-    <div class="slider-viewport"><img class="slide-img" alt="Loading…"/></div>
-    <button class="slider-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
-    <div class="slider-dots" aria-hidden="true"></div>
-  </div><div class="caption"></div>
+    <!-- Maple Slab -->
+    <section class="section card">
+      <div class="card-header">
+        <h2 class="title">Maple Slab</h2>
+        <span class="badge">Available</span>
+      </div>
+      <div class="gallery"
+           data-title="Maple Slab"
+           data-folder="images/maple_1/"
+           data-prefix="maple_">
+        <div class="frame">
+          <img class="main" alt="Maple Slab"/>
+          <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
+          <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
+          <div class="chrome">
+            <span class="count">1 / 1</span>
+            <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
+              <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
+              <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="thumbs" aria-label="Thumbnails"></div>
+      </div>
+    </section>
 
-  <h2>Myrtlewood Slab Showcase 2</h2>
-  <div class="slider" data-folder="images/myrtle_2/" data-title="Myrtlewood slab">
-    <button class="slider-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
-    <div class="slider-viewport"><img class="slide-img" alt="Loading…"/></div>
-    <button class="slider-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
-    <div class="slider-dots" aria-hidden="true"></div>
-  </div><div class="caption"></div>
+    <!-- Myrtlewood Slab 2 -->
+    <section class="section card">
+      <div class="card-header">
+        <h2 class="title">Myrtlewood Slab 2</h2>
+        <span class="badge">Available</span>
+      </div>
+      <div class="gallery"
+           data-title="Myrtlewood Slab 2"
+           data-folder="images/myrtle_2/"
+           data-prefix="2myrtle_">
+        <div class="frame">
+          <img class="main" alt="Myrtlewood Slab 2"/>
+          <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
+          <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
+          <div class="chrome">
+            <span class="count">1 / 1</span>
+            <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
+              <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
+              <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="thumbs" aria-label="Thumbnails"></div>
+      </div>
+    </section>
 
-  <h2>Walnut Slab Showcase</h2>
-  <div class="slider" data-folder="images/walnut_1/" data-title="Walnut slab">
-    <button class="slider-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
-    <div class="slider-viewport"><img class="slide-img" alt="Loading…"/></div>
-    <button class="slider-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
-    <div class="slider-dots" aria-hidden="true"></div>
-  </div><div class="caption"></div>
+    <!-- Walnut Slab -->
+    <section class="section card">
+      <div class="card-header">
+        <h2 class="title">Walnut Slab</h2>
+        <span class="badge">Available</span>
+      </div>
+      <div class="gallery"
+           data-title="Walnut Slab"
+           data-folder="images/walnut_1/"
+           data-prefix="walnut_">
+        <div class="frame">
+          <img class="main" alt="Walnut Slab"/>
+          <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
+          <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
+          <div class="chrome">
+            <span class="count">1 / 1</span>
+            <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
+              <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
+              <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="thumbs" aria-label="Thumbnails"></div>
+      </div>
+    </section>
 
-<h2>Walnut Slab Showcase 2</h2>
-<div class="slider" data-folder="images/walnut_2/" data-title="Walnut slab">
-  <button class="slider-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
-  <div class="slider-viewport"><img class="slide-img" alt="Loading…"/></div>
-  <button class="slider-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
-  <div class="slider-dots" aria-hidden="true"></div>
-</div><div class="caption"></div>
+    <!-- Walnut Slab 2 -->
+    <section class="section card">
+      <div class="card-header">
+        <h2 class="title">Walnut Slab 2</h2>
+        <span class="badge">Available</span>
+      </div>
+      <div class="gallery"
+           data-title="Walnut Slab 2"
+           data-folder="images/walnut_2/"
+           data-prefix="walnut_">
+        <div class="frame">
+          <img class="main" alt="Walnut Slab 2"/>
+          <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
+          <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
+          <div class="chrome">
+            <span class="count">1 / 1</span>
+            <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
+              <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
+              <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="thumbs" aria-label="Thumbnails"></div>
+      </div>
+    </section>
 
-<h2>Maple Slab Showcase 2</h2>
-<div class="slider" data-folder="images/maple_2/" data-title="Maple slab">
-  <button class="slider-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
-  <div class="slider-viewport"><img class="slide-img" alt="Loading…"/></div>
-  <button class="slider-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
-  <div class="slider-dots" aria-hidden="true"></div>
-</div><div class="caption"></div>
+    <!-- Maple Slab 2 -->
+    <section class="section card">
+      <div class="card-header">
+        <h2 class="title">Maple Slab 2</h2>
+        <span class="badge">Available</span>
+      </div>
+      <div class="gallery"
+           data-title="Maple Slab 2"
+           data-folder="images/maple_2/"
+           data-prefix="maple_">
+        <div class="frame">
+          <img class="main" alt="Maple Slab 2"/>
+          <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
+          <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
+          <div class="chrome">
+            <span class="count">1 / 1</span>
+            <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
+              <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
+              <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="thumbs" aria-label="Thumbnails"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">© <span id="y"></span> Faheem Woodworks</div>
+  </footer>
 
   <script>
-    function probe(url, timeout=6000){
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Image existence probe
+    function probe(url){
       return new Promise(resolve=>{
-        const img = new Image(); let done=false;
-        const timer=setTimeout(()=>{ if(!done){ done=true; img.src=''; resolve(false);}}, timeout);
-        img.onload=()=>{ if(!done){ done=true; clearTimeout(timer); resolve(true);} };
-        img.onerror=()=>{ if(!done){ done=true; clearTimeout(timer); resolve(false);} };
-        img.src=url;
+        const i=new Image();
+        i.onload=()=>resolve(true);
+        i.onerror=()=>resolve(false);
+        i.src=url;
       });
     }
-    async function discoverFiles(folder){
-      try{
-        const res = await fetch(folder + 'manifest.txt', {cache:'no-store'});
-        if(res.ok){
-          const text = await res.text();
-          const listed = text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
-          const verified = [];
-          for(const f of listed){ if(await probe(folder + f)) verified.push(f); }
-          if(verified.length) return verified;
-        }
-      }catch(_){}
-      const parts = folder.replace(/\/$/,'').split('/');
-      const folderName = parts[parts.length-1];
-      const basePrefix = folderName.split('_')[0];
-      const numPart = (folderName.match(/\d+/) || [''])[0];
+
+    // Auto-discover sequential files by prefix: prefix_1.webp ... prefix_N.(webp|jpg|jpeg|png)
+    async function discover(folder, prefix){
       const exts = ['webp','jpg','jpeg','png'];
       const files = [];
       for(let i=1;i<=120;i++){
-        let found=false;
-        const names=[`${basePrefix}_${i}`,`${folderName}_${i}`,...(numPart?[`${numPart}${basePrefix}_${i}`]:[]),`${i}`];
-        for(const stem of names){
-          for(const ext of exts){
-            const cand = `${stem}.${ext}`;
-            if(await probe(folder + cand)){ files.push(cand); found=true; break; }
-          }
-          if(found) break;
+        let found=null;
+        for(const ext of exts){
+          /* eslint-disable no-await-in-loop */
+          const cand = `${folder}${prefix}${i}.${ext}`;
+          if(await probe(cand)){ found = `${prefix}${i}.${ext}`; break; }
         }
-        if(!found && files.length>0) break;
+        if(found){ files.push(found); } else if(files.length){ break; }
       }
       return files;
     }
-    function wireSlider(sliderEl, files){
-      const folder = sliderEl.dataset.folder;
-      const title  = sliderEl.dataset.title || 'Gallery image';
-      const imgEl  = sliderEl.querySelector('img.slide-img');
-      const dotsEl = sliderEl.querySelector('.slider-dots');
-      const captionEl = sliderEl.nextElementSibling?.classList.contains('caption') ? sliderEl.nextElementSibling : null;
-      let idx = 0;
-      function renderDots(){
-        dotsEl.innerHTML='';
-        files.forEach((_,i)=>{
-          const b=document.createElement('button'); b.type='button';
-          if(i===idx) b.setAttribute('aria-current','true');
-          b.addEventListener('click',()=>{idx=i;update(true)});
-          dotsEl.appendChild(b);
-        });
-      }
+
+    async function initGallery(gal){
+      const folder = gal.dataset.folder;
+      const prefix = gal.dataset.prefix;
+      const title  = gal.dataset.title || '';
+      const files  = await discover(folder, prefix);
+
+      const img    = gal.querySelector('.main');
+      const countEl= gal.querySelector('.count');
+      const openA  = gal.querySelector('.js-open');
+      const fullB  = gal.querySelector('.js-full');
+      const thumbs = gal.querySelector('.thumbs');
+      const frame  = gal.querySelector('.frame');
+
+      if(!files.length){ if(img) img.alt='No images found'; return; }
+
+      let idx=0;
+
+      // Thumbnails
+      thumbs.innerHTML='';
+      files.forEach((f,i)=>{
+        const b=document.createElement('button'); b.className='thumb'; b.type='button';
+        const t=document.createElement('img'); t.loading='lazy'; t.src=folder+f; t.alt=`${title} thumb ${i+1}`;
+        b.appendChild(t); b.addEventListener('click',()=>{idx=i;update(true)}); thumbs.appendChild(b);
+      });
+
+      function preload(next){ const n=new Image(); n.src=folder+files[next]; }
       function update(animate){
-        const src = folder + files[idx];
-        if(animate){ imgEl.style.opacity=0; }
-        setTimeout(()=>{ imgEl.src = src; imgEl.alt = `${title} photo ${idx+1}`;
-          if(captionEl) captionEl.textContent = `${title} photo ${idx+1}`; imgEl.style.opacity=1; }, animate?180:0);
-        [...dotsEl.children].forEach((d,i)=> d.toggleAttribute('aria-current', i===idx));
+        const f=files[idx];
+        if(countEl) countEl.textContent = (idx+1)+' / '+files.length;
+        if(openA) openA.href = folder + f;
+        if(animate){ img.classList.add('fade'); }
+        setTimeout(()=>{ img.src = folder+f; img.alt = title || ('Photo '+(idx+1)); img.classList.remove('fade'); }, 120);
+        preload((idx+1)%files.length);
+        [...thumbs.children].forEach((el,i)=> el.classList.toggle('active', i===idx));
       }
-      function next(delta){ idx = (idx + delta + files.length) % files.length; update(true); }
-      sliderEl.querySelectorAll('.slider-btn').forEach(btn=>btn.addEventListener('click',()=> next(parseInt(btn.dataset.dir,10))));
-      sliderEl.tabIndex=0;
-      sliderEl.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') next(1); if(e.key==='ArrowLeft') next(-1); });
-      let sx=null; sliderEl.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;});
-      sliderEl.addEventListener('touchend',e=>{ if(sx==null) return; const dx=e.changedTouches[0].clientX - sx;
-        if(Math.abs(dx)>40){ next(dx<0?1:-1);} sx=null;});
-      renderDots(); update(false);
+      function next(d){ idx=(idx+d+files.length)%files.length; update(true); }
+
+      gal.querySelectorAll('.nav-btn').forEach(btn=>btn.addEventListener('click',()=> next(parseInt(btn.dataset.dir,10))));
+      gal.tabIndex=0;
+      gal.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') next(1); if(e.key==='ArrowLeft') next(-1); if(e.key.toLowerCase()==='f') toggleFull(); });
+      let sx=null; gal.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;});
+      gal.addEventListener('touchend',e=>{ if(sx==null) return; const dx=e.changedTouches[0].clientX - sx; if(Math.abs(dx)>40){ next(dx<0?1:-1);} sx=null;});
+
+      function toggleFull(){
+        if(!document.fullscreenElement){ frame.requestFullscreen?.(); } else { document.exitFullscreen?.(); }
+      }
+      if(fullB) fullB.addEventListener('click', toggleFull);
+
+      update(false);
     }
+
     (async function(){
-      const sliders = document.querySelectorAll('.slider[data-folder]');
-      for(const el of sliders){
-        const files = await discoverFiles(el.dataset.folder);
-        if(files.length) wireSlider(el, files);
-        else el.querySelector('img').alt = 'No images found';
-      }
+      const galleries = document.querySelectorAll('.gallery[data-folder][data-prefix]');
+      for(const gal of galleries){ await initGallery(gal); }
     })();
   </script>
 </body>
 </html>
-
