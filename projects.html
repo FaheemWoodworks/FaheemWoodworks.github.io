@@ -98,7 +98,7 @@
            data-count="10"
            aria-label="Redwood project photo gallery">
         <div class="frame">
-          <img class="main" alt="Redwood project — photo 1" loading="eager"/>
+          <img class="main" alt="Redwood project"/>
           <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
           <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
           <div class="chrome">
@@ -108,7 +108,7 @@
               <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
             </div>
           </div>
-          <div class="caption">Redwood project — photo 1</div>
+          <div class="caption">Redwood project</div>
         </div>
         <div class="thumbs" aria-label="Thumbnails"></div>
       </div>
@@ -126,7 +126,7 @@
            data-count="5"
            aria-label="Myrtle round project photo gallery">
         <div class="frame">
-          <img class="main" alt="Myrtle round project — photo 1"/>
+          <img class="main" alt="Myrtle round project"/>
           <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
           <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
           <div class="chrome">
@@ -136,7 +136,7 @@
               <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
             </div>
           </div>
-          <div class="caption">Myrtle round project — photo 1</div>
+          <div class="caption">Myrtle round project</div>
         </div>
         <div class="thumbs" aria-label="Thumbnails"></div>
       </div>
@@ -154,7 +154,7 @@
            data-count="3"
            aria-label="Picture frame first project photo gallery">
         <div class="frame">
-          <img class="main" alt="Picture frame first project — photo 1"/>
+          <img class="main" alt="Picture frame first project"/>
           <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
           <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
           <div class="chrome">
@@ -164,7 +164,7 @@
               <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
             </div>
           </div>
-          <div class="caption">Picture frame first project — photo 1</div>
+          <div class="caption">Picture frame first project</div>
         </div>
         <div class="thumbs" aria-label="Thumbnails"></div>
       </div>
@@ -182,7 +182,7 @@
            data-count="5"
            aria-label="Picture frame second project photo gallery">
         <div class="frame">
-          <img class="main" alt="Picture frame second project — photo 1"/>
+          <img class="main" alt="Picture frame second project"/>
           <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
           <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
           <div class="chrome">
@@ -192,7 +192,7 @@
               <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
             </div>
           </div>
-          <div class="caption">Picture frame second project — photo 1</div>
+          <div class="caption">Picture frame second project</div>
         </div>
         <div class="thumbs" aria-label="Thumbnails"></div>
       </div>
@@ -235,11 +235,12 @@
         }
         if(found) files.push(found);
       }
-      if(files.length===0){ gal.querySelector('.main').alt = 'No images found'; return; }
+      if(files.length===0){ const m=gal.querySelector('.main'); if(m) m.alt='No images found'; return; }
 
       // DOM elements
       const img    = gal.querySelector('.main');
       const cap    = gal.querySelector('.caption');
+      const baseCaption = cap ? cap.textContent : '';
       const countEl= gal.querySelector('.count');
       const openA  = gal.querySelector('.js-open');
       const fullB  = gal.querySelector('.js-full');
@@ -260,11 +261,16 @@
       function preload(next){ const n=new Image(); n.src=folder+files[next]; }
       function update(animate){
         const f=files[idx];
+        // update top-left count badge
         if(countEl) countEl.textContent = (idx+1)+' / '+files.length;
-        if(cap) cap.textContent = cap.textContent.replace(/— photo \d+$/,'') + ' — photo ' + (idx+1);
+        // keep caption as project title (no photo number)
+        if(cap) cap.textContent = baseCaption;
+        // update "open original" link
         if(openA) openA.href = folder + f;
+
         if(animate){ img.classList.add('fade'); }
-        setTimeout(()=>{ img.src = folder+f; img.alt = cap ? cap.textContent : ('Photo '+(idx+1)); img.classList.remove('fade'); }, 120);
+        setTimeout(()=>{ img.src = folder+f; img.alt = baseCaption || ('Photo '+(idx+1)); img.classList.remove('fade'); }, 120);
+
         preload((idx+1)%files.length);
         [...thumbs.children].forEach((el,i)=> el.classList.toggle('active', i===idx));
       }
