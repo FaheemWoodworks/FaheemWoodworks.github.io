@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Completed Projects — FJ Woodworks</title>
+  <meta name="description" content="Completed custom builds from FJ Woodworks: live-edge slabs, tables, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0b0f1a;--panel:#111827;--muted:#94a3b8;--text:#e5e7eb;--brand:#22c55e;--ring:rgba(34,197,94,.45)}
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{opacity:.9}
+    .container{max-width:1100px;margin:0 auto;padding:1.25rem}
+    header{position:sticky;top:0;z-index:50;background:rgba(11,15,26,.85);backdrop-filter:saturate(160%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px}
+    .brand{display:flex;gap:.6rem;align-items:center;font-weight:700}
+    .logo{width:28px;height:28px;border-radius:9px;background:conic-gradient(from 180deg,#16a34a,#22c55e,#84cc16)}
+    .nav a{color:#cbd5e1}
+    .nav a:hover{color:#fff}
+
+    h1{font-size:clamp(1.6rem,4vw,2.4rem);margin:1.2rem 0 .2rem}
+    p.muted{color:var(--muted)}
+
+    /* --- Modern Gallery Styles --- */
+    .project{margin:1.5rem 0 2.5rem}
+    .card{background:linear-gradient(180deg,#0f172a,#0b0f1a);border-radius:18px;border:1px solid rgba(255,255,255,.06);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .card-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.06)}
+    .badge{border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:.25rem .5rem;color:#a7f3d0;background:rgba(16,185,129,.12);font-size:.8rem}
+
+    .gallery{position:relative;padding:1rem}
+    .frame{position:relative;border-radius:14px;overflow:hidden;background:radial-gradient(1000px 400px at 80% -20%,rgba(34,197,94,.08),transparent 60%), #0b1220;min-height:360px;display:grid;place-items:center}
+    .main{max-width:100%;max-height:72vh;width:100%;height:64vh;object-fit:contain;transition:opacity .25s ease, transform .25s ease}
+    .main.fade{opacity:0}
+    .chrome{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent);pointer-events:none}
+    .count{font-weight:700;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.1);padding:.25rem .5rem;border-radius:999px}
+    .caption{position:absolute;left:0;right:0;bottom:0;padding:.75rem 1rem;background:linear-gradient(0deg,rgba(0,0,0,.55),rgba(0,0,0,0));font-size:.95rem}
+
+    .nav-btn{position:absolute;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:46px;height:46px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.45);cursor:pointer;color:#fff}
+    .nav-btn:hover{background:rgba(0,0,0,.6)}
+    .nav-btn:active{transform:translateY(-50%) scale(.98)}
+    .nav-btn.left{left:.6rem}
+    .nav-btn.right{right:.6rem}
+
+    .thumbs{display:flex;gap:.5rem;overflow-x:auto;padding:.75rem .25rem;margin-top:.75rem}
+    .thumbs::-webkit-scrollbar{height:8px}
+    .thumbs::-webkit-scrollbar-thumb{background:#1f2937;border-radius:999px}
+    .thumb{flex:0 0 auto;width:80px;height:64px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:#0b1220;opacity:.85;cursor:pointer}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .thumb.active{outline:2px solid rgba(34,197,94,.7);opacity:1}
+
+    footer{padding:2rem 0;color:#94a3b8;border-top:1px solid rgba(255,255,255,.06);margin-top:2rem}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand"><div aria-hidden class="logo"></div><span>FJ Woodworks</span></div>
+      <nav aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="#" aria-current="page">Completed Projects</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Completed Projects</h1>
+    <p class="muted">A closer look at finished builds. High‑resolution images with captions, swipe, keyboard arrows, and fullscreen.</p>
+
+    <!-- Project: Redwood -->
+    <section class="project card" id="redwood-project">
+      <div class="card-header">
+        <h2 style="margin:0;font-size:1.25rem">Redwood Project</h2>
+        <span class="badge">Completed</span>
+      </div>
+      <div class="gallery" id="gal-redwood" aria-label="Redwood project photo gallery">
+        <div class="frame">
+          <img class="main" id="gal-redwood-img" src="images/redwood_project/redwood_1.webp" alt="Redwood project photo 1" loading="eager"/>
+          <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
+          <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
+          <div class="chrome">
+            <span class="count" id="gal-redwood-count">1 / 10</span>
+            <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
+              <button class="toolbtn" id="gal-redwood-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
+              <a class="toolbtn" id="gal-redwood-open" aria-label="Open original" href="images/redwood_project/redwood_1.webp" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
+            </div>
+          </div>
+          <div class="caption" id="gal-redwood-cap">Redwood project — final piece</div>
+        </div>
+        <div class="thumbs" id="gal-redwood-thumbs" aria-label="Thumbnails"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="y"></span> FJ Woodworks</div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Utility: check if an image exists (for flexible extensions)
+    function probe(url){
+      return new Promise(resolve=>{ const i=new Image(); i.onload=()=>resolve(true); i.onerror=()=>resolve(false); i.src=url; });
+    }
+
+    (async function(){
+      const folder = 'images/redwood_project/';
+      const base = 'redwood_';
+      const count = 10; // you said 1..10
+      const exts = ['webp','jpg','jpeg','png'];
+      const files = [];
+
+      for(let i=1;i<=count;i++){
+        let found=null;
+        for(const ext of exts){
+          /* eslint-disable no-await-in-loop */
+          const candidate = `${folder}${base}${i}.${ext}`;
+          if(await probe(candidate)){ found = `${base}${i}.${ext}`; break; }
+        }
+        if(found) files.push(found);
+      }
+
+      const img   = document.getElementById('gal-redwood-img');
+      const cap   = document.getElementById('gal-redwood-cap');
+      const cnt   = document.getElementById('gal-redwood-count');
+      const openA = document.getElementById('gal-redwood-open');
+      const fullB = document.getElementById('gal-redwood-full');
+      const thumbs= document.getElementById('gal-redwood-thumbs');
+      const shell = document.getElementById('gal-redwood');
+      let idx=0;
+
+      // Build thumbs
+      files.forEach((f,i)=>{
+        const b=document.createElement('button'); b.className='thumb'; b.type='button';
+        const t=document.createElement('img'); t.loading='lazy'; t.src=folder+f; t.alt='Thumb '+(i+1);
+        b.appendChild(t); b.addEventListener('click',()=>{idx=i;update(true)}); thumbs.appendChild(b);
+      });
+
+      function preload(next){ const n=new Image(); n.src=folder+files[next]; }
+      function update(animate){
+        const f=files[idx];
+        cnt.textContent = (idx+1)+' / '+files.length;
+        cap.textContent = 'Redwood project — photo '+(idx+1);
+        openA.href = folder + f;
+        if(animate){ img.classList.add('fade'); }
+        setTimeout(()=>{ img.src = folder+f; img.alt = cap.textContent; img.classList.remove('fade'); }, 120);
+        preload((idx+1)%files.length);
+        [...thumbs.children].forEach((el,i)=> el.classList.toggle('active', i===idx));
+      }
+      function next(d){ idx=(idx+d+files.length)%files.length; update(true); }
+
+      shell.querySelectorAll('.nav-btn').forEach(btn=>{ btn.addEventListener('click',()=> next(parseInt(btn.dataset.dir,10)) ); });
+      shell.tabIndex=0;
+      shell.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') next(1); if(e.key==='ArrowLeft') next(-1); if(e.key.toLowerCase()==='f') toggleFull(); });
+      let sx=null; shell.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;});
+      shell.addEventListener('touchend',e=>{ if(sx==null) return; const dx=e.changedTouches[0].clientX - sx; if(Math.abs(dx)>40){ next(dx<0?1:-1);} sx=null;});
+
+      function toggleFull(){
+        const el = shell.querySelector('.frame');
+        if(!document.fullscreenElement){ el.requestFullscreen?.(); } else { document.exitFullscreen?.(); }
+      }
+      fullB.addEventListener('click', toggleFull);
+
+      update(false);
+    })();
+  </script>
+</body>
+</html>
