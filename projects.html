@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Completed Projects — Faheem Woodworks</title>
-  <meta name="description" content="Completed custom builds from Faheem Woodworks: live-edge slabs, tables, and more." />
+  <meta name="description" content="Completed custom builds from Faheem Woodworks: live-edge slabs, tables, frames, and more." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -30,7 +30,6 @@
     .navbar-left span{font-weight:700;font-size:1.2rem;color:#fff}
     .navbar-right a{margin-left:1.5rem;color:#22c55e;text-decoration:none;font-weight:600}
     .navbar-right a:hover{text-decoration:underline}
-    /* active link */
     .navbar-right a[aria-current="page"]{text-decoration:underline}
 
     h1{font-size:clamp(1.6rem,4vw,2.4rem);margin:1.2rem 0 .2rem}
@@ -93,23 +92,112 @@
         <h2 style="margin:0;font-size:1.25rem">Redwood Project</h2>
         <span class="badge">Completed</span>
       </div>
-      <div class="gallery" id="gal-redwood" aria-label="Redwood project photo gallery">
+      <div class="gallery" id="gal-redwood"
+           data-folder="images/redwood_project/"
+           data-prefix="redwood_"
+           data-count="10"
+           aria-label="Redwood project photo gallery">
         <div class="frame">
-          <img class="main" id="gal-redwood-img" src="images/redwood_project/redwood_1.webp" alt="Redwood project photo 1" loading="eager"/>
+          <img class="main" alt="Redwood project — photo 1" loading="eager"/>
           <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
           <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
           <div class="chrome">
-            <span class="count" id="gal-redwood-count">1 / 10</span>
+            <span class="count">1 / 10</span>
             <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
-              <button class="toolbtn" id="gal-redwood-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
-              <a class="toolbtn" id="gal-redwood-open" aria-label="Open original" href="images/redwood_project/redwood_1.webp" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
+              <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
+              <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
             </div>
           </div>
-          <div class="caption" id="gal-redwood-cap">Redwood project — final piece</div>
+          <div class="caption">Redwood project — photo 1</div>
         </div>
-        <div class="thumbs" id="gal-redwood-thumbs" aria-label="Thumbnails"></div>
+        <div class="thumbs" aria-label="Thumbnails"></div>
       </div>
     </section>
+
+    <!-- Project: Myrtle Round -->
+    <section class="project card" id="myrtle-round-project">
+      <div class="card-header">
+        <h2 style="margin:0;font-size:1.25rem">Myrtle Round Project</h2>
+        <span class="badge">Completed</span>
+      </div>
+      <div class="gallery" id="gal-myrtle-round"
+           data-folder="images/myrtle_round_project/"
+           data-prefix="myrtle_"
+           data-count="5"
+           aria-label="Myrtle round project photo gallery">
+        <div class="frame">
+          <img class="main" alt="Myrtle round project — photo 1"/>
+          <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
+          <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
+          <div class="chrome">
+            <span class="count">1 / 5</span>
+            <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
+              <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
+              <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
+            </div>
+          </div>
+          <div class="caption">Myrtle round project — photo 1</div>
+        </div>
+        <div class="thumbs" aria-label="Thumbnails"></div>
+      </div>
+    </section>
+
+    <!-- Project: Picture Frame (First) -->
+    <section class="project card" id="frame-first-project">
+      <div class="card-header">
+        <h2 style="margin:0;font-size:1.25rem">Picture Frame — First Project</h2>
+        <span class="badge">Completed</span>
+      </div>
+      <div class="gallery" id="gal-frame-first"
+           data-folder="images/picture_frame_first_project/"
+           data-prefix="frame_"
+           data-count="3"
+           aria-label="Picture frame first project photo gallery">
+        <div class="frame">
+          <img class="main" alt="Picture frame first project — photo 1"/>
+          <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
+          <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
+          <div class="chrome">
+            <span class="count">1 / 3</span>
+            <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
+              <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
+              <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
+            </div>
+          </div>
+          <div class="caption">Picture frame first project — photo 1</div>
+        </div>
+        <div class="thumbs" aria-label="Thumbnails"></div>
+      </div>
+    </section>
+
+    <!-- Project: Picture Frame (Second) -->
+    <section class="project card" id="frame-second-project">
+      <div class="card-header">
+        <h2 style="margin:0;font-size:1.25rem">Picture Frame — Second Project</h2>
+        <span class="badge">Completed</span>
+      </div>
+      <div class="gallery" id="gal-frame-second"
+           data-folder="images/picture_frame_second_project/"
+           data-prefix="frame_"
+           data-count="5"
+           aria-label="Picture frame second project photo gallery">
+        <div class="frame">
+          <img class="main" alt="Picture frame second project — photo 1"/>
+          <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
+          <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
+          <div class="chrome">
+            <span class="count">1 / 5</span>
+            <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
+              <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
+              <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
+            </div>
+          </div>
+          <div class="caption">Picture frame second project — photo 1</div>
+        </div>
+        <div class="thumbs" aria-label="Thumbnails"></div>
+      </div>
+    </section>
+
   </main>
 
   <footer>
@@ -119,69 +207,88 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Utility: check if an image exists (for flexible extensions)
+    // Probe if an image exists
     function probe(url){
-      return new Promise(resolve=>{ const i=new Image(); i.onload=()=>resolve(true); i.onerror=()=>resolve(false); i.src=url; });
+      return new Promise(resolve=>{
+        const i=new Image();
+        i.onload=()=>resolve(true);
+        i.onerror=()=>resolve(false);
+        i.src=url;
+      });
     }
 
-    (async function(){
-      const folder = 'images/redwood_project/';
-      const base = 'redwood_';
-      const count = 10; // 1..10
-      const exts = ['webp','jpg','jpeg','png'];
-      const files = [];
+    // Initialize a gallery block from its dataset
+    async function initGallery(gal){
+      const folder = gal.dataset.folder;      // e.g. images/redwood_project/
+      const prefix = gal.dataset.prefix;      // e.g. redwood_
+      const count  = parseInt(gal.dataset.count,10); // e.g. 10
+      const exts   = ['webp','jpg','jpeg','png'];
+      const files  = [];
 
+      // Find the first existing extension per index (1..count)
       for(let i=1;i<=count;i++){
         let found=null;
         for(const ext of exts){
-          const candidate = `${folder}${base}${i}.${ext}`;
           /* eslint-disable no-await-in-loop */
-          if(await probe(candidate)){ found = `${base}${i}.${ext}`; break; }
+          const candidate = `${folder}${prefix}${i}.${ext}`;
+          if(await probe(candidate)){ found = `${prefix}${i}.${ext}`; break; }
         }
         if(found) files.push(found);
       }
+      if(files.length===0){ gal.querySelector('.main').alt = 'No images found'; return; }
 
-      const img   = document.getElementById('gal-redwood-img');
-      const cap   = document.getElementById('gal-redwood-cap');
-      const cnt   = document.getElementById('gal-redwood-count');
-      const openA = document.getElementById('gal-redwood-open');
-      const fullB = document.getElementById('gal-redwood-full');
-      const thumbs= document.getElementById('gal-redwood-thumbs');
-      const shell = document.getElementById('gal-redwood');
+      // DOM elements
+      const img    = gal.querySelector('.main');
+      const cap    = gal.querySelector('.caption');
+      const countEl= gal.querySelector('.count');
+      const openA  = gal.querySelector('.js-open');
+      const fullB  = gal.querySelector('.js-full');
+      const thumbs = gal.querySelector('.thumbs');
+      const frame  = gal.querySelector('.frame');
       let idx=0;
 
+      // Build thumbs
+      thumbs.innerHTML='';
       files.forEach((f,i)=>{
         const b=document.createElement('button'); b.className='thumb'; b.type='button';
         const t=document.createElement('img'); t.loading='lazy'; t.src=folder+f; t.alt='Thumb '+(i+1);
-        b.appendChild(t); b.addEventListener('click',()=>{idx=i;update(true)}); thumbs.appendChild(b);
+        b.appendChild(t);
+        b.addEventListener('click',()=>{idx=i;update(true)});
+        thumbs.appendChild(b);
       });
 
       function preload(next){ const n=new Image(); n.src=folder+files[next]; }
       function update(animate){
         const f=files[idx];
-        cnt.textContent = (idx+1)+' / '+files.length;
-        cap.textContent = 'Redwood project — photo '+(idx+1);
-        openA.href = folder + f;
+        if(countEl) countEl.textContent = (idx+1)+' / '+files.length;
+        if(cap) cap.textContent = cap.textContent.replace(/— photo \d+$/,'') + ' — photo ' + (idx+1);
+        if(openA) openA.href = folder + f;
         if(animate){ img.classList.add('fade'); }
-        setTimeout(()=>{ img.src = folder+f; img.alt = cap.textContent; img.classList.remove('fade'); }, 120);
+        setTimeout(()=>{ img.src = folder+f; img.alt = cap ? cap.textContent : ('Photo '+(idx+1)); img.classList.remove('fade'); }, 120);
         preload((idx+1)%files.length);
         [...thumbs.children].forEach((el,i)=> el.classList.toggle('active', i===idx));
       }
       function next(d){ idx=(idx+d+files.length)%files.length; update(true); }
 
-      shell.querySelectorAll('.nav-btn').forEach(btn=>{ btn.addEventListener('click',()=> next(parseInt(btn.dataset.dir,10)) ); });
-      shell.tabIndex=0;
-      shell.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') next(1); if(e.key==='ArrowLeft') next(-1); if(e.key.toLowerCase()==='f') toggleFull(); });
-      let sx=null; shell.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;});
-      shell.addEventListener('touchend',e=>{ if(sx==null) return; const dx=e.changedTouches[0].clientX - sx; if(Math.abs(dx)>40){ next(dx<0?1:-1);} sx=null;});
+      gal.querySelectorAll('.nav-btn').forEach(btn=>{ btn.addEventListener('click',()=> next(parseInt(btn.dataset.dir,10)) ); });
+      gal.tabIndex=0;
+      gal.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') next(1); if(e.key==='ArrowLeft') next(-1); if(e.key.toLowerCase()==='f') toggleFull(); });
+      let sx=null; gal.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;});
+      gal.addEventListener('touchend',e=>{ if(sx==null) return; const dx=e.changedTouches[0].clientX - sx; if(Math.abs(dx)>40){ next(dx<0?1:-1);} sx=null;});
 
       function toggleFull(){
-        const el = shell.querySelector('.frame');
-        if(!document.fullscreenElement){ el.requestFullscreen?.(); } else { document.exitFullscreen?.(); }
+        if(!document.fullscreenElement){ frame.requestFullscreen?.(); } else { document.exitFullscreen?.(); }
       }
-      fullB.addEventListener('click', toggleFull);
+      if(fullB) fullB.addEventListener('click', toggleFull);
 
+      // Initial render
       update(false);
+    }
+
+    // Initialize all galleries on the page
+    (async function(){
+      const galleries = document.querySelectorAll('.gallery[data-folder][data-prefix][data-count]');
+      for(const gal of galleries){ await initGallery(gal); }
     })();
   </script>
 </body>
