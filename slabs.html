@@ -16,7 +16,7 @@
     a{color:var(--brand);text-decoration:none}
     .container{max-width:1100px;margin:0 auto;padding:1.25rem}
 
-    /* ===== Branded sticky navbar (matches projects) ===== */
+    /* Navbar */
     .site-header{
       position:sticky; top:0; z-index:50;
       background:rgba(11,15,26,.9);
@@ -27,14 +27,14 @@
     .navbar-left{display:flex;align-items:center;gap:.75rem}
     .navbar-left img{height:40px;width:auto;border-radius:6px}
     .navbar-left span{font-weight:700;font-size:1.2rem;color:#fff}
-    .navbar-right a{margin-left:1.5rem;color:#22c55e;text-decoration:none;font-weight:600}
+    .navbar-right a{margin-left:1.5rem;color:#22c55e;text-decoration:none;font-weight:700}
     .navbar-right a:hover{text-decoration:underline}
     .navbar-right a[aria-current="page"]{text-decoration:underline}
 
     h1{font-size:clamp(1.6rem,4vw,2.4rem);margin:1.2rem 0 .2rem;text-align:left}
     p.muted{color:#94a3b8}
 
-    /* --- Card gallery (same as projects) --- */
+    /* Card gallery */
     .section{margin:1.5rem 0 2.5rem}
     .card{background:linear-gradient(180deg,#0f172a,#0b0f1a);border-radius:18px;border:1px solid rgba(255,255,255,.06);box-shadow:0 10px 30px rgba(0,0,0,.35)}
     .card-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.06)}
@@ -66,7 +66,6 @@
 </head>
 <body>
 
-  <!-- ===== Navbar ===== -->
   <header class="site-header">
     <div class="container navbar">
       <div class="navbar-left">
@@ -91,16 +90,12 @@
         <h2 class="title">Myrtlewood Slab</h2>
         <span class="badge">Available</span>
       </div>
-      <div class="gallery"
-           data-title="Myrtlewood Slab"
-           data-folder="images/myrtle_1/"
-           data-prefix="myrtle_">
+      <div class="gallery" data-title="Myrtlewood Slab" data-folder="images/myrtle_1/" data-prefix="myrtle_">
         <div class="frame">
           <img class="main" alt="Myrtlewood Slab"/>
           <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
           <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
-          <div class="chrome">
-            <span class="count">1 / 1</span>
+          <div class="chrome"><span class="count">1 / 1</span>
             <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
               <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
               <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
@@ -117,16 +112,12 @@
         <h2 class="title">Maple Slab</h2>
         <span class="badge">Available</span>
       </div>
-      <div class="gallery"
-           data-title="Maple Slab"
-           data-folder="images/maple_1/"
-           data-prefix="maple_">
+      <div class="gallery" data-title="Maple Slab" data-folder="images/maple_1/" data-prefix="maple_">
         <div class="frame">
           <img class="main" alt="Maple Slab"/>
           <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
           <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
-          <div class="chrome">
-            <span class="count">1 / 1</span>
+          <div class="chrome"><span class="count">1 / 1</span>
             <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
               <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
               <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
@@ -138,30 +129,26 @@
     </section>
 
     <!-- Myrtlewood Slab 2 -->
-<section class="section card">
-  <div class="card-header">
-    <h2 class="title">Myrtlewood Slab 2</h2>
-    <span class="badge">Available</span>
-  </div>
-  <div class="gallery"
-       data-title="Myrtlewood Slab 2"
-       data-folder="images/myrtle_2/"
-       data-prefix="myrtle_">   <!-- was 2myrtle_ -->
-    <div class="frame">
-      <img class="main" alt="Myrtlewood Slab 2"/>
-      <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
-      <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
-      <div class="chrome">
-        <span class="count">1 / 1</span>
-        <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
-          <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
-          <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
-        </div>
+    <section class="section card">
+      <div class="card-header">
+        <h2 class="title">Myrtlewood Slab 2</h2>
+        <span class="badge">Available</span>
       </div>
-    </div>
-    <div class="thumbs" aria-label="Thumbnails"></div>
-  </div>
-</section>
+      <div class="gallery" data-title="Myrtlewood Slab 2" data-folder="images/myrtle_2/" data-prefix="myrtle_">
+        <div class="frame">
+          <img class="main" alt="Myrtlewood Slab 2"/>
+          <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
+          <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
+          <div class="chrome"><span class="count">1 / 1</span>
+            <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
+              <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
+              <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="thumbs" aria-label="Thumbnails"></div>
+      </div>
+    </section>
 
     <!-- Walnut Slab -->
     <section class="section card">
@@ -169,16 +156,12 @@
         <h2 class="title">Walnut Slab</h2>
         <span class="badge">Available</span>
       </div>
-      <div class="gallery"
-           data-title="Walnut Slab"
-           data-folder="images/walnut_1/"
-           data-prefix="walnut_">
+      <div class="gallery" data-title="Walnut Slab" data-folder="images/walnut_1/" data-prefix="walnut_">
         <div class="frame">
           <img class="main" alt="Walnut Slab"/>
           <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
           <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
-          <div class="chrome">
-            <span class="count">1 / 1</span>
+          <div class="chrome"><span class="count">1 / 1</span>
             <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
               <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
               <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
@@ -195,16 +178,12 @@
         <h2 class="title">Walnut Slab 2</h2>
         <span class="badge">Available</span>
       </div>
-      <div class="gallery"
-           data-title="Walnut Slab 2"
-           data-folder="images/walnut_2/"
-           data-prefix="walnut_">
+      <div class="gallery" data-title="Walnut Slab 2" data-folder="images/walnut_2/" data-prefix="walnut_">
         <div class="frame">
           <img class="main" alt="Walnut Slab 2"/>
           <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
           <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
-          <div class="chrome">
-            <span class="count">1 / 1</span>
+          <div class="chrome"><span class="count">1 / 1</span>
             <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
               <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
               <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
@@ -221,16 +200,12 @@
         <h2 class="title">Maple Slab 2</h2>
         <span class="badge">Available</span>
       </div>
-      <div class="gallery"
-           data-title="Maple Slab 2"
-           data-folder="images/maple_2/"
-           data-prefix="maple_">
+      <div class="gallery" data-title="Maple Slab 2" data-folder="images/maple_2/" data-prefix="maple_">
         <div class="frame">
           <img class="main" alt="Maple Slab 2"/>
           <button class="nav-btn left" aria-label="Previous photo" data-dir="-1">&#10094;</button>
           <button class="nav-btn right" aria-label="Next photo" data-dir="1">&#10095;</button>
-          <div class="chrome">
-            <span class="count">1 / 1</span>
+          <div class="chrome"><span class="count">1 / 1</span>
             <div class="toolbar" style="display:flex;gap:.5rem;pointer-events:auto">
               <button class="toolbtn js-full" aria-label="Enter fullscreen" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff">⛶</button>
               <a class="toolbtn js-open" aria-label="Open original" href="#" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);color:#fff;display:inline-grid;place-items:center">↗</a>
@@ -240,7 +215,6 @@
         <div class="thumbs" aria-label="Thumbnails"></div>
       </div>
     </section>
-
   </main>
 
   <footer>
@@ -250,30 +224,27 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Image existence probe
-    function probe(url){
-      return new Promise(resolve=>{
-        const i=new Image();
-        i.onload=()=>resolve(true);
-        i.onerror=()=>resolve(false);
-        i.src=url;
-      });
-    }
-
-    // Auto-discover sequential files by prefix: prefix_1.webp ... prefix_N.(webp|jpg|jpeg|png)
+    // Fast-ish discovery: parallel HEAD checks (webp), small range, cache-busted
     async function discover(folder, prefix){
-      const exts = ['webp','jpg','jpeg','png'];
-      const files = [];
-      for(let i=1;i<=120;i++){
-        let found=null;
-        for(const ext of exts){
-          /* eslint-disable no-await-in-loop */
-          const cand = `${folder}${prefix}${i}.${ext}`;
-          if(await probe(cand)){ found = `${prefix}${i}.${ext}`; break; }
+      // Try manifest.txt first (if you ever add it)
+      try{
+        const res = await fetch(folder + 'manifest.txt', {cache:'no-store'});
+        if(res.ok){
+          const text = await res.text();
+          const listed = text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+          if(listed.length) return listed;
         }
-        if(found){ files.push(found); } else if(files.length){ break; }
-      }
-      return files;
+      }catch(_){}
+
+      const MAX = 30;
+      const checks = Array.from({length: MAX}, (_,i)=>i+1).map(async n=>{
+        try{
+          const r = await fetch(`${folder}${prefix}${n}.webp?v=${Date.now()}`, {method:'HEAD', cache:'no-store'});
+          return r.ok ? `${prefix}${n}.webp` : null;
+        }catch{ return null; }
+      });
+      const res = await Promise.all(checks);
+      return res.filter(Boolean);
     }
 
     async function initGallery(gal){
@@ -293,7 +264,6 @@
 
       let idx=0;
 
-      // Thumbnails
       thumbs.innerHTML='';
       files.forEach((f,i)=>{
         const b=document.createElement('button'); b.className='thumb'; b.type='button';
