@@ -49,6 +49,18 @@
     .about{max-width:900px;margin:3rem auto;padding:2rem;background:var(--panel);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.35)}
     .about h2{text-align:center;font-size:1.8rem;margin-bottom:1rem;color:var(--brand)}
     .about p{line-height:1.65;color:var(--text);margin-bottom:1rem;font-size:1.05rem}
+
+    /* ==== Video Embed ==== */
+    .video-wrap{max-width:1100px;margin:2rem auto;padding:0 1.25rem}
+    .video-wrap h2{font-size:clamp(1.4rem,3.2vw,1.9rem);margin:0 0 .8rem;text-align:left}
+    .yt-lite{position:relative;background:#0b1220;border:1px solid rgba(255,255,255,.06);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.35);overflow:hidden;cursor:pointer}
+    .yt-lite::before{content:"";display:block;padding-top:56.25%}
+    .yt-lite > .thumb,.yt-lite iframe{position:absolute;inset:0;width:100%;height:100%}
+    .yt-lite > .thumb{background-size:cover;background-position:center;filter:contrast(1.02) saturate(1.05);transition:transform .25s ease}
+    .yt-lite:hover > .thumb{transform:scale(1.01)}
+    .yt-lite .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.45))}
+    .yt-lite .yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-grid;place-items:center;width:64px;height:64px;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(90deg,#16a34a,#22c55e);color:#05230f;box-shadow:0 6px 18px rgba(34,197,94,.35);font-weight:800}
+    .yt-lite .yt-play:after{content:"▶";font-size:22px;translate:1px 0}
   </style>
 </head>
 <body>
@@ -109,6 +121,16 @@
     <p>I source the slabs for my larger projects from the Pacific Northwest. The PNW gets a lot of rain, which, combined with the temperate climate, allows for long growing seasons and for the trees to reach immense sizes over centuries. This contributes to large, wide slabs of wood that are the most sought after on the planet. The color is unlike anything else you will ever see, and that's a promise. Don't believe me? See for yourself in my Commission Ready Slabs section and decide for yourself.</p>
   </section>
 
+  <!-- VIDEO SECTION -->
+  <section class="video-wrap" id="shop-video">
+    <h2>Shop Tour (Video)</h2>
+    <div class="yt-lite" data-id="BkM_1F8sWKA" aria-label="Play video: Shop tour">
+      <div class="thumb"></div>
+      <div class="shade" aria-hidden="true"></div>
+      <button class="yt-play" aria-label="Play video"></button>
+    </div>
+  </section>
+
   <script>
     (function(){
       const hero = document.getElementById('hero');
@@ -136,13 +158,35 @@
       hero.tabIndex = 0;
       hero.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') step(-1); if(e.key==='ArrowRight') step(1); });
       let sx=null; hero.addEventListener('touchstart', e=>{ sx = e.touches[0].clientX; });
-      hero.addEventListener('touchend', e=>{
-        if(sx==null) return; const dx = e.changedTouches[0].clientX - sx;
+      hero.addEventListener('touchend', e=>{ if(sx==null) return; const dx = e.changedTouches[0].clientX - sx;
         if(Math.abs(dx)>40) step(dx<0?1:-1); sx=null;
       });
 
       update();
     })();
+
+    // === YouTube Lite Embed ===
+    (function(){
+      const lite = document.querySelector('.yt-lite[data-id]');
+      if(!lite) return;
+      const id = lite.dataset.id.trim();
+      const thumb = lite.querySelector('.thumb');
+      thumb.style.backgroundImage = `url(https://i.ytimg.com/vi/${id}/hqdefault.jpg)`;
+      function play(){
+        const src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+        const ifr = document.createElement('iframe');
+        ifr.setAttribute('title','YouTube video player');
+        ifr.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+        ifr.setAttribute('allowfullscreen','');
+        ifr.setAttribute('src', src);
+        ifr.style.border = '0';
+        lite.replaceChildren(ifr);
+      }
+      lite.addEventListener('click', play);
+      lite.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); play(); }});
+      lite.tabIndex = 0;
+    })();
   </script>
 </body>
 </html>
+
