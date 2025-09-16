@@ -14,7 +14,7 @@
     html,body{margin:0}
     body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text)}
     a{color:var(--brand);text-decoration:none}
-    .container{max-width:1100px;margin:0 auto;padding:1.25rem}
+    .container{max-width:1200px;margin:0 auto;padding:1.25rem}
 
     /* Navbar */
     .site-header{position:sticky;top:0;z-index:50;background:rgba(11,15,26,.9);backdrop-filter:saturate(160%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
@@ -45,22 +45,13 @@
     .hero-count{position:absolute;left:.75rem;top:.5rem;z-index:3;font-weight:700;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12);padding:.25rem .5rem;border-radius:999px;color:#fff}
     @media (max-width:800px){ .hero-slide{aspect-ratio:16/10} }
 
-    /* About Section */
-    .about{max-width:900px;margin:3rem auto;padding:2rem;background:var(--panel);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.35)}
-    .about h2{text-align:center;font-size:1.8rem;margin-bottom:1rem;color:var(--brand)}
+    /* About + Video side by side */
+    .about-video{display:flex;flex-wrap:wrap;gap:2rem;align-items:flex-start;margin:3rem auto;max-width:1200px}
+    .about{flex:1 1 50%;padding:2rem;background:var(--panel);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.35)}
+    .about h2{font-size:1.8rem;margin-bottom:1rem;color:var(--brand)}
     .about p{line-height:1.65;color:var(--text);margin-bottom:1rem;font-size:1.05rem}
-
-    /* ==== Video Embed ==== */
-    .video-wrap{max-width:1100px;margin:2rem auto;padding:0 1.25rem}
-    .video-wrap h2{font-size:clamp(1.4rem,3.2vw,1.9rem);margin:0 0 .8rem;text-align:left}
-    .yt-lite{position:relative;background:#0b1220;border:1px solid rgba(255,255,255,.06);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.35);overflow:hidden;cursor:pointer}
-    .yt-lite::before{content:"";display:block;padding-top:56.25%}
-    .yt-lite > .thumb,.yt-lite iframe{position:absolute;inset:0;width:100%;height:100%}
-    .yt-lite > .thumb{background-size:cover;background-position:center;filter:contrast(1.02) saturate(1.05);transition:transform .25s ease}
-    .yt-lite:hover > .thumb{transform:scale(1.01)}
-    .yt-lite .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.45))}
-    .yt-lite .yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-grid;place-items:center;width:64px;height:64px;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(90deg,#16a34a,#22c55e);color:#05230f;box-shadow:0 6px 18px rgba(34,197,94,.35);font-weight:800}
-    .yt-lite .yt-play:after{content:"▶";font-size:22px;translate:1px 0}
+    .video{flex:1 1 50%;min-width:300px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.35)}
+    .video iframe{width:100%;height:100%;border:0}
   </style>
 </head>
 <body>
@@ -114,20 +105,18 @@
     </div>
   </div>
 
-  <!-- ABOUT SECTION -->
-  <section class="about">
-    <h2>About Me</h2>
-    <p>Welcome to my website, my name is Faheem! I'm a woodworker in the metro Atlanta area. I started woodworking in 2023 because I wanted to make custom picture frames for myself. Since then, I expanded to cutting boards, charcuterie boards, boxes, tabletops, and coffee tables. I now have the pleasure to work with extremely rare and one-of-a-kind pieces of wood.</p>
-    <p>I source the slabs for my larger projects from the Pacific Northwest. The PNW gets a lot of rain, which, combined with the temperate climate, allows for long growing seasons and for the trees to reach immense sizes over centuries. This contributes to large, wide slabs of wood that are the most sought after on the planet. The color is unlike anything else you will ever see, and that's a promise. Don't believe me? See for yourself in my Commission Ready Slabs section and decide for yourself.</p>
-  </section>
-
-  <!-- VIDEO SECTION -->
-  <section class="video-wrap" id="shop-video">
-    <h2>Shop Tour (Video)</h2>
-    <div class="yt-lite" data-id="BkM_1F8sWKA" aria-label="Play video: Shop tour">
-      <div class="thumb"></div>
-      <div class="shade" aria-hidden="true"></div>
-      <button class="yt-play" aria-label="Play video"></button>
+  <!-- ABOUT + VIDEO SECTION -->
+  <section class="about-video">
+    <div class="about">
+      <h2>About Me</h2>
+      <p>Welcome to my website, my name is Faheem! I'm a woodworker in the metro Atlanta area. I started woodworking in 2023 because I wanted to make custom picture frames for myself. Since then, I expanded to cutting boards, charcuterie boards, boxes, tabletops, and coffee tables. I now have the pleasure to work with extremely rare and one-of-a-kind pieces of wood.</p>
+      <p>I source the slabs for my larger projects from the Pacific Northwest. The PNW gets a lot of rain, which, combined with the temperate climate, allows for long growing seasons and for the trees to reach immense sizes over centuries. This contributes to large, wide slabs of wood that are the most sought after on the planet. The color is unlike anything else you will ever see, and that's a promise. Don't believe me? See for yourself in my Commission Ready Slabs section and decide for yourself.</p>
+    </div>
+    <div class="video">
+      <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=FJwoodworks"
+              title="FJ Woodworks YouTube Channel"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
     </div>
   </section>
 
@@ -164,29 +153,6 @@
 
       update();
     })();
-
-    // === YouTube Lite Embed ===
-    (function(){
-      const lite = document.querySelector('.yt-lite[data-id]');
-      if(!lite) return;
-      const id = lite.dataset.id.trim();
-      const thumb = lite.querySelector('.thumb');
-      thumb.style.backgroundImage = `url(https://i.ytimg.com/vi/${id}/hqdefault.jpg)`;
-      function play(){
-        const src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
-        const ifr = document.createElement('iframe');
-        ifr.setAttribute('title','YouTube video player');
-        ifr.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-        ifr.setAttribute('allowfullscreen','');
-        ifr.setAttribute('src', src);
-        ifr.style.border = '0';
-        lite.replaceChildren(ifr);
-      }
-      lite.addEventListener('click', play);
-      lite.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); play(); }});
-      lite.tabIndex = 0;
-    })();
   </script>
 </body>
 </html>
-
